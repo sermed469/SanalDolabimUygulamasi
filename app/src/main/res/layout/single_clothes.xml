@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="190dp"
+    android:layout_marginHorizontal="10dp"
+    android:layout_marginVertical="10dp"
+    android:background="#EADEBD">
+
+    <ImageView
+        android:id="@+id/imageViewAllClothesList"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+    <TextView
+        android:id="@+id/textViewAllClothesList1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
+        android:text="Kıyafet türü"
+        android:textColor="#000000"
+        app:layout_constraintStart_toEndOf="@+id/imageViewAllClothesList"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView5AllClothesList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:text="Renk"
+        android:textColor="#000000"
+        app:layout_constraintStart_toEndOf="@+id/imageViewAllClothesList"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAllClothesList1" />
+
+    <TextView
+        android:id="@+id/textView7AllClothesList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:text="Desen"
+        android:textColor="#000000"
+        app:layout_constraintStart_toEndOf="@+id/imageViewAllClothesList"
+        app:layout_constraintTop_toBottomOf="@+id/textView5AllClothesList" />
+
+    <TextView
+        android:id="@+id/textView9AllClothesList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:text="Alınma tarihi"
+        android:textColor="#000000"
+        app:layout_constraintStart_toEndOf="@+id/imageViewAllClothesList"
+        app:layout_constraintTop_toBottomOf="@+id/textView7AllClothesList" />
+
+    <TextView
+        android:id="@+id/textView10AllClothesList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:text="Fiyat"
+        android:textColor="#000000"
+        app:layout_constraintStart_toEndOf="@+id/imageViewAllClothesList"
+        app:layout_constraintTop_toBottomOf="@+id/textView9AllClothesList" />
+
+    <TextView
+        android:id="@+id/textViewAllClothesListType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:text="TextView"
+        android:textColor="#000000"
+        app:layout_constraintStart_toEndOf="@+id/textViewAllClothesList1"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewAllClothesListColor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        android:textColor="#000000"
+        app:layout_constraintStart_toEndOf="@+id/textView5AllClothesList"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAllClothesListType" />
+
+    <TextView
+        android:id="@+id/textViewAllClothesListDesen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        android:textColor="#000000"
+        app:layout_constraintStart_toEndOf="@+id/textView7AllClothesList"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAllClothesListColor" />
+
+    <TextView
+        android:id="@+id/textViewAllClothesListDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        android:textColor="#000000"
+        app:layout_constraintStart_toEndOf="@+id/textView9AllClothesList"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAllClothesListDesen" />
+
+    <TextView
+        android:id="@+id/textViewAllClothesListPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        android:textColor="#000000"
+        app:layout_constraintStart_toEndOf="@+id/textView10AllClothesList"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAllClothesListDate" />
+
+    <CheckBox
+        android:id="@+id/checkBoxChooseClothes"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
