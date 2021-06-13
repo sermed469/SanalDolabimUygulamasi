@@ -1,4 +1,4 @@
-package tr.yildiz.edu.sermedkerim;
+package tr.yildiz.edu.sermedkerim.Classes;
 
 import java.util.ArrayList;
 

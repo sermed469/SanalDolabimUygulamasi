@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.view.LayoutInflater;
@@ -19,6 +20,9 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+
+import tr.yildiz.edu.sermedkerim.Database.FeedReaderContract;
+import tr.yildiz.edu.sermedkerim.Database.FeedReaderDbHelper;
 
 public class ClothesImageAdapter extends RecyclerView.Adapter<ClothesImageAdapter.ClothesImageViewHolder> {
 
@@ -84,7 +88,20 @@ public class ClothesImageAdapter extends RecyclerView.Adapter<ClothesImageAdapte
                 builder.setPositiveButton("Evet", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+
+                        FeedReaderDbHelper dbHelper = new FeedReaderDbHelper(context);
+                        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+                        String selection = FeedReaderContract.FeedEntryClothesPhoto.COLUMN_NAME_BYTE + " LIKE ?";
+                        String[] selectionArgs = { ClothesImagesActivity.stringArrayList.get(position).toString() };
+                        int deletedRows = db.delete(FeedReaderContract.FeedEntryClothesPhoto.TABLE_NAME, selection, selectionArgs);
+
+                        String selection1 = FeedReaderContract.FeedEntryClothes.COLUMN_NAME_BYTE + " LIKE ?";
+                        String[] selectionArgs1 = { ClothesImagesActivity.stringArrayList.get(position).toString() };
+                        int deletedRows1 = db.delete(FeedReaderContract.FeedEntryClothes.TABLE_NAME, selection, selectionArgs);
+
                         clothesİmages.remove(position);
+                        ClothesImagesActivity.stringArrayList.remove(position);
                         ClothesImageAdapter.super.notifyDataSetChanged();
                         Toast.makeText(context,"kıyafet silindi",Toast.LENGTH_SHORT).show();
                     }
@@ -101,8 +118,8 @@ public class ClothesImageAdapter extends RecyclerView.Adapter<ClothesImageAdapte
                 int drawerposition = getintent.getIntExtra("drawerposition",0);
 
                 Intent intent = new Intent(context,ClothesActivity.class);
-                intent.putExtra("DrawerPosition",drawerposition);
-                intent.putExtra("imageposition",position);
+                intent.putExtra("DrawerPosition",ClothesImagesActivity.position);
+                intent.putExtra("imageposition",ClothesImagesActivity.stringArrayList.get(position));
                 context.startActivity(intent);
                 ((Activity) context).finish();
             }

@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -21,6 +22,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+       /* FeedReaderDbHelper dbHelper = new FeedReaderDbHelper(getApplicationContext());
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        db.execSQL("DROP TABLE IF EXISTS " + FeedReaderContract.FeedEntryDrawer.TABLE_NAME);
+        dbHelper.onDowngrade(db,0,1);
+        dbHelper.onCreate(db);*/
 
         gotoCabinRoom = findViewById(R.id.buttonGoToCabin);
 

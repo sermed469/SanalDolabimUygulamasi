@@ -1,4 +1,4 @@
-package tr.yildiz.edu.sermedkerim;
+package tr.yildiz.edu.sermedkerim.Adapter;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -14,6 +14,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+
+import tr.yildiz.edu.sermedkerim.Classes.Clothes;
+import tr.yildiz.edu.sermedkerim.R;
 
 import static android.content.Context.MODE_PRIVATE;
 

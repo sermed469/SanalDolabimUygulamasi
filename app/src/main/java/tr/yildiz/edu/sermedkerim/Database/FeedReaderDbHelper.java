@@ -1,8 +1,10 @@
-package tr.yildiz.edu.sermedkerim;
+package tr.yildiz.edu.sermedkerim.Database;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import tr.yildiz.edu.sermedkerim.Database.FeedReaderContract;
 
 public class FeedReaderDbHelper extends SQLiteOpenHelper {
 
@@ -18,6 +20,8 @@ public class FeedReaderDbHelper extends SQLiteOpenHelper {
             "CREATE TABLE " + FeedReaderContract.FeedEntryClothesPhoto.TABLE_NAME + " (" +
                     FeedReaderContract.FeedEntryClothesPhoto._ID + "INTEGER PRIMARY KEY," +
                     FeedReaderContract.FeedEntryClothesPhoto.COLUMN_NAME_PHOTO + " BLOB," +
+                    FeedReaderContract.FeedEntryClothesPhoto.COLUMN_NAME_BYTE + " TEXT," +
+                    FeedReaderContract.FeedEntryClothesPhoto.COLUMN_NAME_DRAWER + " TEXT," +
                     " FOREIGN KEY (" + FeedReaderContract.FeedEntryClothesPhoto.COLUMN_NAME_DRAWER + ") REFERENCES " + FeedReaderContract.FeedEntryDrawer.TABLE_NAME + "(" + FeedReaderContract.FeedEntryDrawer.COLUMN_NAME_NUM + "));";
 
     private static final String SQL_CREATE_ENTRIES3 =
@@ -29,7 +33,10 @@ public class FeedReaderDbHelper extends SQLiteOpenHelper {
                     FeedReaderContract.FeedEntryClothes.COLUMN_NAME_DATE + " TEXT," +
                     FeedReaderContract.FeedEntryClothes.COLUMN_NAME_PRICE + " TEXT," +
                     FeedReaderContract.FeedEntryClothes.COLUMN_NAME_PHOTO + " BLOB," +
-                    " FOREIGN KEY (" + FeedReaderContract.FeedEntryClothes.COLUMN_NAME_DRAWER + ") REFERENCES " + FeedReaderContract.FeedEntryDrawer.TABLE_NAME + "(" + FeedReaderContract.FeedEntryDrawer.COLUMN_NAME_NUM + "));";
+                    FeedReaderContract.FeedEntryClothes.COLUMN_NAME_BYTE + " TEXT," +
+                    FeedReaderContract.FeedEntryClothes.COLUMN_NAME_DRAWER + " TEXT," +
+                    " FOREIGN KEY (" + FeedReaderContract.FeedEntryClothes.COLUMN_NAME_DRAWER + ") REFERENCES " + FeedReaderContract.FeedEntryDrawer.TABLE_NAME + "(" + FeedReaderContract.FeedEntryDrawer.COLUMN_NAME_NUM + ")," +
+                    " FOREIGN KEY (" + FeedReaderContract.FeedEntryClothes.COLUMN_NAME_BYTE + ") REFERENCES " + FeedReaderContract.FeedEntryClothesPhoto.TABLE_NAME + "(" + FeedReaderContract.FeedEntryClothesPhoto.COLUMN_NAME_BYTE + "));";
 
     private static final String SQL_CREATE_ENTRIES4 =
             "CREATE TABLE " + FeedReaderContract.FeedEntryEtkinlik.TABLE_NAME + " (" +
@@ -42,12 +49,19 @@ public class FeedReaderDbHelper extends SQLiteOpenHelper {
     private static final String SQL_CREATE_ENTRIES5 =
             "CREATE TABLE " + FeedReaderContract.FeedEntryEtkinlikPhoto.TABLE_NAME + " (" +
                     FeedReaderContract.FeedEntryEtkinlikPhoto._ID + "INTEGER PRIMARY KEY," +
+                    FeedReaderContract.FeedEntryEtkinlikPhoto.COLUMN_NAME_TYPE + " TEXT," +
+                    FeedReaderContract.FeedEntryEtkinlikPhoto.COLUMN_NAME_COLOR + " TEXT," +
+                    FeedReaderContract.FeedEntryEtkinlikPhoto.COLUMN_NAME_DESEN + " TEXT," +
+                    FeedReaderContract.FeedEntryEtkinlikPhoto.COLUMN_NAME_DATE + " TEXT," +
+                    FeedReaderContract.FeedEntryEtkinlikPhoto.COLUMN_NAME_PRICE + " TEXT," +
                     FeedReaderContract.FeedEntryEtkinlikPhoto.COLUMN_NAME_PHOTO + " BLOB," +
+                    FeedReaderContract.FeedEntryEtkinlikPhoto.COLUMN_NAME_ETKINLIK + " TEXT," +
                     " FOREIGN KEY (" + FeedReaderContract.FeedEntryEtkinlikPhoto.COLUMN_NAME_ETKINLIK + ") REFERENCES " + FeedReaderContract.FeedEntryEtkinlik.TABLE_NAME + "(" + FeedReaderContract.FeedEntryEtkinlik.COLUMN_NAME_NAME + "));";
 
     private static final String SQL_CREATE_ENTRIES6 =
             "CREATE TABLE " + FeedReaderContract.FeedEntryCombine.TABLE_NAME + " (" +
                     FeedReaderContract.FeedEntryCombine._ID + " INTEGER PRIMARY KEY," +
+                    FeedReaderContract.FeedEntryCombine.COLUMN_NAME_NUM + " TEXT," +
                     FeedReaderContract.FeedEntryCombine.COLUMN_NAME_HEAD + " BLOB," +
                     FeedReaderContract.FeedEntryCombine.COLUMN_NAME_FACE + " BLOB," +
                     FeedReaderContract.FeedEntryCombine.COLUMN_NAME_USTBEDEN + " BLOB," +
@@ -94,5 +108,22 @@ public class FeedReaderDbHelper extends SQLiteOpenHelper {
     }
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         onUpgrade(db, oldVersion, newVersion);
+    }
+
+    public static void onCreate1(SQLiteDatabase db) {
+        db.execSQL(SQL_CREATE_ENTRIES);
+        db.execSQL(SQL_CREATE_ENTRIES2);
+        db.execSQL(SQL_CREATE_ENTRIES3);
+        db.execSQL(SQL_CREATE_ENTRIES4);
+        db.execSQL(SQL_CREATE_ENTRIES5);
+        db.execSQL(SQL_CREATE_ENTRIES6);
+    }
+    public static void onUpgrade1(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL(SQL_DELETE_ENTRIES6);
+        db.execSQL(SQL_DELETE_ENTRIES5);
+        db.execSQL(SQL_DELETE_ENTRIES4);
+        db.execSQL(SQL_DELETE_ENTRIES3);
+        db.execSQL(SQL_DELETE_ENTRIES2);
+        db.execSQL(SQL_DELETE_ENTRIES);
     }
 }

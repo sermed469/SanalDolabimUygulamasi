@@ -1,8 +1,9 @@
-package tr.yildiz.edu.sermedkerim;
+package tr.yildiz.edu.sermedkerim.Adapter;
 
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,12 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+
+import tr.yildiz.edu.sermedkerim.ClothesImagesActivity;
+import tr.yildiz.edu.sermedkerim.Classes.Drawer;
+import tr.yildiz.edu.sermedkerim.Database.FeedReaderContract;
+import tr.yildiz.edu.sermedkerim.Database.FeedReaderDbHelper;
+import tr.yildiz.edu.sermedkerim.R;
 
 public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerViewHolder> {
 
@@ -57,7 +64,7 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
         holder.addClothes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context,ClothesImagesActivity.class);
+                Intent intent = new Intent(context, ClothesImagesActivity.class);
                 intent.putExtra("drawerposition",position);
                 context.startActivity(intent);
             }
@@ -74,6 +81,18 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
                 builder.setPositiveButton("Evet", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+
+                        FeedReaderDbHelper dbHelper = new FeedReaderDbHelper(context);
+                        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+                        String selection = FeedReaderContract.FeedEntryClothesPhoto.COLUMN_NAME_DRAWER + " LIKE ?";
+                        String[] selectionArgs = { drawers.get(position).getNumber() };
+                        int deletedRows = db.delete(FeedReaderContract.FeedEntryClothesPhoto.TABLE_NAME, selection, selectionArgs);
+
+                        selection = FeedReaderContract.FeedEntryDrawer.COLUMN_NAME_NUM + " LIKE ?";
+
+                        deletedRows = db.delete(FeedReaderContract.FeedEntryDrawer.TABLE_NAME, selection, selectionArgs);
+
                         drawers.remove(position);
                         DrawerAdapter.super.notifyDataSetChanged();
                         Toast.makeText(context,"çekmece silindi",Toast.LENGTH_SHORT).show();

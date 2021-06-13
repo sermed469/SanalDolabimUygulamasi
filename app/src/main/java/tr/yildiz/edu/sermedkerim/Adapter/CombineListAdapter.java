@@ -1,9 +1,9 @@
-package tr.yildiz.edu.sermedkerim;
+package tr.yildiz.edu.sermedkerim.Adapter;
 
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
+import android.database.sqlite.SQLiteDatabase;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,12 +18,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import tr.yildiz.edu.sermedkerim.Classes.Combine;
+import tr.yildiz.edu.sermedkerim.Database.FeedReaderContract;
+import tr.yildiz.edu.sermedkerim.Database.FeedReaderDbHelper;
+import tr.yildiz.edu.sermedkerim.R;
+import tr.yildiz.edu.sermedkerim.ShowSavedCombineActivity;
+
 public class CombineListAdapter extends RecyclerView.Adapter<CombineListAdapter.CombineListViewHolder>{
 
-    ArrayList<Bitmap[]> combineArrayList;
+    ArrayList<Combine> combineArrayList;
     Context context;
 
-    public CombineListAdapter(ArrayList<Bitmap[]> combineArrayList, Context context) {
+    public CombineListAdapter(ArrayList<Combine> combineArrayList, Context context) {
         this.combineArrayList = combineArrayList;
         this.context = context;
     }
@@ -51,13 +57,13 @@ public class CombineListAdapter extends RecyclerView.Adapter<CombineListAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull CombineListViewHolder holder, int position) {
-        holder.textView.setText((position + 1) + ". Kombin");
+        holder.textView.setText(combineArrayList.get(position).getNumber());
 
         holder.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context,ShowSavedCombineActivity.class);
-                intent.putExtra("CombinePosition",position);
+                Intent intent = new Intent(context, ShowSavedCombineActivity.class);
+                intent.putExtra("CombinePosition",combineArrayList.get(position).getNumber());
                 context.startActivity(intent);
             }
         });
@@ -72,6 +78,14 @@ public class CombineListAdapter extends RecyclerView.Adapter<CombineListAdapter.
                 builder.setPositiveButton("Evet", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+
+                        FeedReaderDbHelper dbHelper = new FeedReaderDbHelper(context);
+                        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+                        String selection = FeedReaderContract.FeedEntryCombine.COLUMN_NAME_NUM + " LIKE ?";
+                        String[] selectionArgs = { combineArrayList.get(position).getNumber() };
+                        int deletedRows = db.delete(FeedReaderContract.FeedEntryCombine.TABLE_NAME, selection, selectionArgs);
+
                         combineArrayList.remove(position);
                         CombineListAdapter.super.notifyDataSetChanged();
                         Toast.makeText(context,"Kombin silindi",Toast.LENGTH_SHORT).show();

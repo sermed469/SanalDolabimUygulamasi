@@ -6,42 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ActivityDetailsUpdate">
 
-    <ImageButton
-        android:id="@+id/imageButtonDeleteActivityLocation"
-        android:layout_width="37dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="188dp"
-        android:onClick="deleteActivityLocation"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/editTextActivityNameUpdate"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_baseline_delete_24" />
-
-    <ImageButton
-        android:id="@+id/imageButtonDeleteActivityDate"
-        android:layout_width="37dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="136dp"
-        android:onClick="deleteActivityDate"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/editTextActivityNameUpdate"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_baseline_delete_24" />
-
-    <ImageButton
-        android:id="@+id/imageButtonDeleteActivityType"
-        android:layout_width="37dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="80dp"
-        android:onClick="deleteActivityType"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/editTextActivityNameUpdate"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_baseline_delete_24" />
-
     <TextView
         android:id="@+id/textViewActivityNameUpdate"
         android:layout_width="wrap_content"
@@ -165,17 +129,5 @@
         app:layout_constraintHorizontal_bias="0.036"
         app:layout_constraintStart_toEndOf="@+id/imageButtonActivityLocationUpdate"
         app:layout_constraintTop_toBottomOf="@+id/textViewActivityDateUpdate" />
-
-    <ImageButton
-        android:id="@+id/imageButtonDeleteActivityName"
-        android:layout_width="37dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="24dp"
-        android:onClick="deleteActivityName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/editTextActivityNameUpdate"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_baseline_delete_24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,9 +1,8 @@
-package tr.yildiz.edu.sermedkerim;
+package tr.yildiz.edu.sermedkerim.Adapter;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +12,11 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.io.InputStreamReader;
 import java.util.ArrayList;
+
+import tr.yildiz.edu.sermedkerim.CabinRoomActivity;
+import tr.yildiz.edu.sermedkerim.Classes.Clothes;
+import tr.yildiz.edu.sermedkerim.R;
 
 public class CabinRoomClothesAdapter extends RecyclerView.Adapter<CabinRoomClothesAdapter.CabinRoomClothesViewHolder>{
 
@@ -53,7 +55,7 @@ public class CabinRoomClothesAdapter extends RecyclerView.Adapter<CabinRoomCloth
         holder.select.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context,CabinRoomActivity.class);
+                Intent intent = new Intent(context, CabinRoomActivity.class);
                 //Clothes.cabinRoomClothes.add(clothesPhoto.get(position).getPhoto());
 
                 switch (clothesPhoto.get(position).getClothesType()){
